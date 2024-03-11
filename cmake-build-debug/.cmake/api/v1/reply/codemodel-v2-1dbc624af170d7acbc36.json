@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.27"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Rational_Numbers_Calc",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Rational_Numbers_Calc::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Rational_Numbers_Calc-Debug-fc36a12dd0f44af204e1.json",
+					"name" : "Rational_Numbers_Calc",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/Documents/.Random Shit/CRF/CS112 Assignments/Assignment 2/Task 3 & 4/Rational Numbers Calc/cmake-build-debug",
+		"source" : "D:/Documents/.Random Shit/CRF/CS112 Assignments/Assignment 2/Task 3 & 4/Rational Numbers Calc"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
