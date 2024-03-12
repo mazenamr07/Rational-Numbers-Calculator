@@ -2,10 +2,14 @@
 
 using namespace std;
 
-// Function to check if input is a number
+// Function to check if input is a valid number
 bool number_check(const string& number) {
     int mini_check = 0;
+    bool digit_count = false;
     for (char digit : number) {
+        if ((digit == '.' or digit == '/') and !digit_count) {
+            return false;
+        }
         if (!isdigit(digit)) {
             if (digit == '.' or digit == '/') {
                 mini_check += 1;
@@ -14,6 +18,7 @@ bool number_check(const string& number) {
                 return false;
             }
         }
+        digit_count = true;
     }
     if (mini_check > 1) {
         return false;
