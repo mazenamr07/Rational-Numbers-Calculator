@@ -1,35 +1,44 @@
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
 // Function to check if input is a valid number
 bool number_check(const string& number) {
-    int mini_check = 0;
-//    bool digit_count = false;
+    int decimal_check = 0;
+    int sign_check = 0;
+    bool allSpaces = all_of(number.begin(), number.end(), [](char i) {return i == ' ';});
 
-    if (number[0] == '.' or number[0] == '/') {
+    if (number.empty() or allSpaces) {
         return false;
     }
-    if (number[number.size() - 1] == '.' or number[number.size() - 1] == '/') {
+    if (!isdigit(number[number.size() - 1])) {
         return false;
     }
-
+    if (!isdigit(number[0])) {
+        if (number[0] != '+' and number[0] != '-') {
+            return false;
+        }
+    }
+    for (int i = 0; i < number.size(); i++) {
+        if (!isdigit(number[i])) {
+            
+        }
+    }
     for (char digit : number) {
-//        if ((digit == '.' or digit == '/') and !digit_count) {
-//            return false;
-//        }
+        if (decimal_check > 1) {
+            return false;
+        }
         if (!isdigit(digit)) {
-            if (digit == '.' or digit == '/') {
-                mini_check += 1;
-            }
-            else {
-                return false;
+            if (digit == '+' or digit == '-') {
+                if (digit != number[0] and decimal_check != 1) {
+                    return false;
+                }
+                sign_check += 1;
+            } else if (digit == '/' or digit == '.') {
+                decimal_check += 1;
             }
         }
-//        digit_count = true;
-    }
-    if (mini_check > 1) {
-        return false;
     }
     return true;
 }
@@ -47,7 +56,8 @@ void menu() {
 
         // Checking if input is valid
         while (choice != "0" and choice != "1" and choice != "2") {
-            cout << "Please select a valid option" << endl << ">>";
+            cout << "Please select a valid option\n"
+                    ">>";
             getline(cin, choice);
         }
 
@@ -58,7 +68,8 @@ void menu() {
 
         string number_1, number_2, operation;
         cout << "Please enter two numbers and an operation:\n"
-                "(e.g. 1/2 + 1/4, 5/3 - 3/5)" << endl << ">>";
+                "(e.g. 1/2 + 1/4, 5/3 - 3/5)\n"
+                "1st Number >>";
 
         if (choice == "1") {
             getline(cin, number_1, ' ');
@@ -66,7 +77,7 @@ void menu() {
             getline(cin, number_2);
 
             while (!number_check(number_1) or !number_check(number_2)) {
-                cout << "Operation isn't valid, enter again:";
+                cout << "Operation is invalid, enter again:";
                 getline(cin, number_1, ' ');
                 getline(cin, operation, ' ');
                 getline(cin, number_2);
@@ -74,10 +85,29 @@ void menu() {
         }
         else if (choice == "2") {
             getline(cin, number_1);
-            cout << ">>";
+
+            while (!number_check(number_1)) {
+                cout << "Number is invalid, enter again:\n"
+                        ">>";
+                getline(cin, number_1);
+            }
+            cout << "Operation >>";
             getline(cin, operation);
-            cout << ">>";
+
+            string operations = "+-*/%";
+            while (operations.find(operation) == string::npos or operation.empty()) {
+                cout << "Operation is invalid, enter again:\n"
+                        ">>";
+                getline(cin, operation);
+            }
+            cout << "2nd Number >>";
             getline(cin, number_2);
+
+            while (!number_check(number_2)) {
+                cout << "Number is invalid, enter again:\n"
+                        ">>";
+                getline(cin, number_2);
+            }
         }
 
         cout << number_1 << endl << operation << endl << number_2;
