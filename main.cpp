@@ -3,13 +3,19 @@
 
 using namespace std;
 
+// Function to erase spaces from a string
+string removeSpaces(string str) {
+    str.erase(remove(str.begin(), str.end(), ' '), str.end());
+    return str;
+}
+
 // Function to check if input is a valid number
-bool number_check(const string& number) {
+bool number_check(string number) {
     int decimal_check = 0;
     int sign_check = 0;
-    bool allSpaces = all_of(number.begin(), number.end(), [](char i) {return i == ' ';});
+    number = removeSpaces(number);
 
-    if (number.empty() or allSpaces) {
+    if (number.empty()) {
         return false;
     }
     if (!isdigit(number[number.size() - 1])) {
@@ -20,23 +26,20 @@ bool number_check(const string& number) {
             return false;
         }
     }
+    int check = -2;
     for (int i = 0; i < number.size(); i++) {
-        if (!isdigit(number[i])) {
-            
-        }
-    }
-    for (char digit : number) {
-        if (decimal_check > 1) {
+        if (decimal_check > 1 or sign_check > 2) {
             return false;
         }
-        if (!isdigit(digit)) {
-            if (digit == '+' or digit == '-') {
-                if (digit != number[0] and decimal_check != 1) {
-                    return false;
-                }
-                sign_check += 1;
-            } else if (digit == '/' or digit == '.') {
+        if (!isdigit(number[i])) {
+            if (number[i] == '/' or number[i] == '.') {
                 decimal_check += 1;
+                check = i;
+            } else if ((number[i] == '+' or number[i] == '-') and number[check] != '.'
+            and (i == 0 or i == check + 1)) {
+                sign_check += 1;
+            } else {
+                return false;
             }
         }
     }
@@ -117,5 +120,5 @@ void menu() {
 }
 
 int main() {
-    menu();
+
 }
