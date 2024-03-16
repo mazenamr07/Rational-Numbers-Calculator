@@ -1,4 +1,4 @@
-# Install script for directory: D:/Documents/.Random Shit/CRF/CS112 Assignments/Assignment 2/Task 3 & 4/Rational Numbers Calc
+# Install script for directory: C:/Users/salih/CLionProjects/Rational-Numbers-Calculator
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/Documents/.Random Shit/CRF/CS112 Assignments/Assignment 2/Task 3 & 4/Rational Numbers Calc/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/salih/CLionProjects/Rational-Numbers-Calculator/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

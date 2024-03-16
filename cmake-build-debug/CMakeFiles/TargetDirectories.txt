@@ -1,3 +1,3 @@
-D:/Documents/.Random Shit/CRF/CS112 Assignments/Assignment 2/Task 3 & 4/Rational Numbers Calc/cmake-build-debug/CMakeFiles/Rational_Numbers_Calc.dir
-D:/Documents/.Random Shit/CRF/CS112 Assignments/Assignment 2/Task 3 & 4/Rational Numbers Calc/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/Documents/.Random Shit/CRF/CS112 Assignments/Assignment 2/Task 3 & 4/Rational Numbers Calc/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/salih/CLionProjects/Rational-Numbers-Calculator/cmake-build-debug/CMakeFiles/Rational_Numbers_Calc.dir
+C:/Users/salih/CLionProjects/Rational-Numbers-Calculator/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/salih/CLionProjects/Rational-Numbers-Calculator/cmake-build-debug/CMakeFiles/rebuild_cache.dir
