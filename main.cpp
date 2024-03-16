@@ -117,5 +117,6 @@ void menu() {
 }
 
 int main() {
+    cout << "cossomak"<<"\n";
     menu();
 }
