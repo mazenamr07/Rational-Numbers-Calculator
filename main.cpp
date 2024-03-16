@@ -139,5 +139,5 @@ int result(){
         sum += fract_dec(num);
         cout << sum << endl;
     }
-    return 0;
+     return 0;
 }
