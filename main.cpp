@@ -1,5 +1,7 @@
 #include <iostream>
 #include <algorithm>
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -22,7 +24,7 @@ bool number_check(const string& number) {
     }
     for (int i = 0; i < number.size(); i++) {
         if (!isdigit(number[i])) {
-            
+
         }
     }
     for (char digit : number) {
@@ -117,6 +119,25 @@ void menu() {
 }
 
 int main() {
-    cout << "cossomak"<<"\n";
+
     menu();
+}
+double fract_dec(const string & fract ){
+    stringstream ss(fract);
+    double nume , denm ;
+    char slsh;
+    ss >> nume >> slsh >> denm;
+
+    return static_cast <double>(nume) / slsh;
+
+}
+int result(){
+    string num;
+    double sum = '0.0';
+    cout << "enter what u want: ";
+    while (getline(cin,num,'+')){
+        sum += fract_dec(num);
+        cout << sum << endl;
+    }
+    return 0;
 }
