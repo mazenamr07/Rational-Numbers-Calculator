@@ -1,3 +1,0 @@
-C:/Users/salih/CLionProjects/Rational-Numbers-Calculator/cmake-build-debug/CMakeFiles/Rational_Numbers_Calc.dir
-C:/Users/salih/CLionProjects/Rational-Numbers-Calculator/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/salih/CLionProjects/Rational-Numbers-Calculator/cmake-build-debug/CMakeFiles/rebuild_cache.dir

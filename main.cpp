@@ -5,13 +5,15 @@
 
 using namespace std;
 
-double fract_dec(const string & fract ){
-    stringstream ss(fract);
-    double nume , denm ;
-    char slsh;
-    ss >> nume >> slsh >> denm;
+// Function to convert rational number string to double
+double fractionDec(const string& fraction ) {
+    stringstream ss(fraction);
+    double numerator, denominator;
+    char slash;
+    ss >> numerator >> slash >> denominator;
 
-    return static_cast <double>(nume) / slsh;
+    return static_cast <double>(numerator) / denominator;
+}
 
 // Function to erase spaces from a string
 string removeSpaces(string str) {
@@ -56,6 +58,21 @@ bool number_check(string number) {
     return true;
 }
 
+// Function to check if input is a valid operation
+bool operationCheck(char operation) {
+    char validOperations[4] = {'+', '-', '*', '/'};
+
+    if (operation == ' ') {
+        return false;
+    }
+    bool check = any_of(begin(validOperations), end(validOperations),
+                        [operation](char i) {return operation == i;});
+    if (!check) {
+        return false;
+    }
+    return true;
+}
+
 void menu() {
     cout << "**Welcome to Rational Number Calculator**" << endl;
     while (true) {
@@ -74,29 +91,75 @@ void menu() {
             getline(cin, choice);
         }
 
-        if (choice == "0") {
+        if (choice == "0") { // Exiting the program
             cout << "Bye bye!";
             break;
         }
 
-        string number_1, number_2, operation;
         cout << "Please enter two numbers and an operation:\n"
                 "(e.g. 1/2 + 1/4, 5/3 - 3/5)\n"
-                "1st Number >>";
+                ">>";
 
         if (choice == "1") {
-            getline(cin, number_1, ' ');
-            getline(cin, operation, ' ');
-            getline(cin, number_2);
+            string number_1, number_2, expression;
+            char operation = 0;
+            getline(cin, expression);
 
-            while (!number_check(number_1) or !number_check(number_2)) {
-                cout << "Operation is invalid, enter again:";
-                getline(cin, number_1, ' ');
-                getline(cin, operation, ' ');
-                getline(cin, number_2);
+            stringstream ss(expression);
+            ss >> number_1 >> operation >> number_2;
+
+            while (!number_check(number_1) or !number_check(number_2)
+            or !operationCheck(operation)) {
+
+                if (!number_check(number_1)) {
+                    cout << "Number 1 is invalid, enter expression again:\n"
+                            ">>";
+
+                    getline(cin, expression);
+                    ss >> number_1 >> operation >> number_2;
+
+                } else if (!number_check(number_2)) {
+                    cout << "Number 2 is invalid, enter expression again:\n"
+                            ">>";
+
+                    getline(cin, expression);
+                    ss >> number_1 >> operation >> number_2;
+
+                } else if (!operationCheck(operation)){
+                    cout << "Operation is invalid, enter expression again:\n"
+                            ">>";
+
+                    getline(cin, expression);
+                    ss >> number_1 >> operation >> number_2;
+                }
+
+                number_check(number_1);
+                number_check(number_2);
+                operationCheck(operation);
             }
+
+            cout << number_1 << endl << operation << endl << number_2;
         }
+
+//        if (choice == "1") {
+//            ss >> number_1 >> operation >> number_2;
+////            getline(cin, number_1, ' ');
+////            getline(cin, operation, ' ');
+////            getline(cin, number_2);
+//
+////            string operations = "+-*/";
+////            bool operationCheck_1 = any_of(operations.begin(), operations.end(),
+////                                         [operation](char i) {return i = operation[0];});
+//
+//            while (!number_check(number_1) or !number_check(number_2)) {
+//                cout << "Operation is invalid, enter again:";
+//                getline(cin, number_1, ' ');
+//                getline(cin, operation, ' ');
+//                getline(cin, number_2);
+//            }
+//        }
         else if (choice == "2") {
+            string number_1, number_2, operation;
             getline(cin, number_1);
 
             while (!number_check(number_1)) {
@@ -123,12 +186,15 @@ void menu() {
             }
         }
 
-        cout << number_1 << endl << operation << endl << number_2;
+//        cout << number_1 << endl << operation << endl << number_2;
 
         break;
     }
 }
 
 int main() {
+    while (true) {
+        menu();
 
+    }
 }
