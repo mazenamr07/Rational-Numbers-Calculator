@@ -90,17 +90,17 @@ void menu() {
                     ">>";
             getline(cin, choice);
         }
-
         if (choice == "0") { // Exiting the program
             cout << "Bye bye!";
             break;
         }
 
-        cout << "Please enter two numbers and an operation:\n"
-                "(e.g. 1/2 + 1/4, 5/3 - 3/5)\n"
-                ">>";
-
+        // Taking in numbers and operation
         if (choice == "1") {
+            cout << "Please enter two numbers and an operation:\n"
+                    "(e.g. 1/2 + 1/4, 5/3 - 3/5)\n"
+                    ">>";
+
             string number_1, number_2, expression;
             char operation = 0;
             getline(cin, expression);
@@ -108,6 +108,7 @@ void menu() {
             stringstream ss(expression);
             ss >> number_1 >> operation >> number_2;
 
+            // Checking if both numbers and operation are valid
             while (!number_check(number_1) or !number_check(number_2)
             or !operationCheck(operation)) {
 
@@ -116,52 +117,42 @@ void menu() {
                             ">>";
 
                     getline(cin, expression);
+                    ss.str(""); // Clearing content
+                    ss.clear(); // Clearing any error flags
+                    ss << expression;
                     ss >> number_1 >> operation >> number_2;
-
-                } else if (!number_check(number_2)) {
+                }
+                else if (!number_check(number_2)) {
                     cout << "Number 2 is invalid, enter expression again:\n"
                             ">>";
 
                     getline(cin, expression);
+                    ss.str(""); // Clearing content
+                    ss.clear(); // Clearing any error flags
+                    ss << expression;
                     ss >> number_1 >> operation >> number_2;
-
-                } else if (!operationCheck(operation)){
+                }
+                else {
                     cout << "Operation is invalid, enter expression again:\n"
                             ">>";
 
                     getline(cin, expression);
+                    ss.str(""); // Clearing content
+                    ss.clear(); // Clearing any error flags
+                    ss << expression;
                     ss >> number_1 >> operation >> number_2;
                 }
-
-                number_check(number_1);
-                number_check(number_2);
-                operationCheck(operation);
             }
-
-            cout << number_1 << endl << operation << endl << number_2;
         }
-
-//        if (choice == "1") {
-//            ss >> number_1 >> operation >> number_2;
-////            getline(cin, number_1, ' ');
-////            getline(cin, operation, ' ');
-////            getline(cin, number_2);
-//
-////            string operations = "+-*/";
-////            bool operationCheck_1 = any_of(operations.begin(), operations.end(),
-////                                         [operation](char i) {return i = operation[0];});
-//
-//            while (!number_check(number_1) or !number_check(number_2)) {
-//                cout << "Operation is invalid, enter again:";
-//                getline(cin, number_1, ' ');
-//                getline(cin, operation, ' ');
-//                getline(cin, number_2);
-//            }
-//        }
         else if (choice == "2") {
             string number_1, number_2, operation;
+
+            cout << "Please enter two numbers and an operation:\n"
+                    "(e.g. 1/2 + 1/4, 5/3 - 3/5)\n"
+                    "1st Number >>";
             getline(cin, number_1);
 
+            // checking if 1st number is valid
             while (!number_check(number_1)) {
                 cout << "Number is invalid, enter again:\n"
                         ">>";
@@ -169,16 +160,19 @@ void menu() {
             }
             cout << "Operation >>";
             getline(cin, operation);
+            char op = operation[0];
 
-            string operations = "+-*/%";
-            while (operations.find(operation) == string::npos or operation.empty()) {
+            // checking if operation is valid
+            while (!operationCheck(op) or operation.size() > 1) {
                 cout << "Operation is invalid, enter again:\n"
                         ">>";
                 getline(cin, operation);
+                op = operation[0];
             }
             cout << "2nd Number >>";
             getline(cin, number_2);
 
+            // checking if 2nd number is valid
             while (!number_check(number_2)) {
                 cout << "Number is invalid, enter again:\n"
                         ">>";
@@ -186,7 +180,11 @@ void menu() {
             }
         }
 
-//        cout << number_1 << endl << operation << endl << number_2;
+        // Adjusting numbers with signs
+
+
+
+        // Performing actual calculations
 
         break;
     }
