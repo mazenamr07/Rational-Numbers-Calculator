@@ -77,7 +77,7 @@ void menu() {
     cout << "**Welcome to Rational Number Calculator**" << endl;
     while (true) {
         string choice;
-        cout << "Firstly, choose your way of entering numbers (type 0 to exit)\n"
+        cout << "Choose your way of entering numbers (type 0 to exit)\n"
                 "1- 1/2 + 1/4\n"
                 "2- 1/2 (enter)\n"
                 "   +   (enter)\n"
@@ -217,30 +217,46 @@ void menu() {
         }
 
         // Performing actual calculations
-        double double_1 = 0, double_2 = 0;
+        double double_1 = 0, double_2 = 0, result = 0;
 
-        if (numberX_1.find('/') != string::npos) { // converting 1st to double
+        // Converting numbers to double
+        if (numberX_1.find('/') != string::npos) {
             double_1 = fractionDec(numberX_1);
         }
         else {
             double_1 = stod(numberX_1);
         }
-        if (numberX_2.find('/') != string::npos) { // converting 2nd to double
+        if (numberX_2.find('/') != string::npos) {
             double_2 = fractionDec(numberX_2);
         }
         else {
             double_2 = stod(numberX_2);
         }
 
+        // Assigning signs to each number
+        if (negative_1) {
+            double_1 = 0 - double_1;
+        }
+        if (negative_2) {
+            double_2 = 0 - double_2;
+        }
 
+        // Calculating final result
+        if (operationX == "+") {
+            result = double_1 + double_2;
+        } else if (operationX == "-") {
+            result = double_1 - double_2;
+        } else if (operationX == "*") {
+            result = double_1 * double_2;
+        } else if (operationX == "/") {
+            result = double_1 / double_2;
+        }
 
-        break;
+        // Displaying result and looping to reuse the program
+        cout << "That would be:" << ' ' << result << endl << endl;
     }
 }
 
 int main() {
-    while (true) {
-        menu();
-
-    }
+    menu();
 }
