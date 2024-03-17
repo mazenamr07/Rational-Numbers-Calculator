@@ -96,12 +96,13 @@ void menu() {
         }
 
         // Taking in numbers and operation
+        string number_1, number_2, operationX;
         if (choice == "1") {
             cout << "Please enter two numbers and an operation:\n"
                     "(e.g. 1/2 + 1/4, 5/3 - 3/5)\n"
                     ">>";
 
-            string number_1, number_2, expression;
+            string expression;
             char operation = 0;
             getline(cin, expression);
 
@@ -143,15 +144,15 @@ void menu() {
                     ss >> number_1 >> operation >> number_2;
                 }
             }
+            operationX += operation;
         }
         else if (choice == "2") {
-            string number_1, number_2, operation;
-
             cout << "Please enter two numbers and an operation:\n"
                     "(e.g. 1/2 + 1/4, 5/3 - 3/5)\n"
                     "1st Number >>";
             getline(cin, number_1);
 
+            string operation;
             // checking if 1st number is valid
             while (!number_check(number_1)) {
                 cout << "Number is invalid, enter again:\n"
@@ -178,13 +179,60 @@ void menu() {
                         ">>";
                 getline(cin, number_2);
             }
+            operationX += operation;
         }
 
         // Adjusting numbers with signs
+        string numberX_1, numberX_2;
+        int minusSign = 0;
+        bool negative_1 = false;
 
+        for (char digit : number_1) { // Checking if 1st number is negative
+            if (digit == '+') {
+                continue;
+            } else if (digit == '-') {
+                minusSign += 1;
+                continue;
+            }
+            numberX_1 += digit;
+        }
+        if (minusSign == 1) {
+            negative_1 = true;
+        }
 
+        minusSign = 0;
+        bool negative_2 = false;
+
+        for (char digit : number_2) { // Checking if 2nd number is negative
+            if (digit == '+') {
+                continue;
+            } else if (digit == '-') {
+                minusSign += 1;
+                continue;
+            }
+            numberX_2 += digit;
+        }
+        if (minusSign == 1) {
+            negative_2 = true;
+        }
 
         // Performing actual calculations
+        double double_1 = 0, double_2 = 0;
+
+        if (numberX_1.find('/') != string::npos) { // converting 1st to double
+            double_1 = fractionDec(numberX_1);
+        }
+        else {
+            double_1 = stod(numberX_1);
+        }
+        if (numberX_2.find('/') != string::npos) { // converting 2nd to double
+            double_2 = fractionDec(numberX_2);
+        }
+        else {
+            double_2 = stod(numberX_2);
+        }
+
+
 
         break;
     }
