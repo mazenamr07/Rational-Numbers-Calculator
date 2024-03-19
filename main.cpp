@@ -2,20 +2,11 @@
 #include <algorithm>
 #include <sstream>
 #include <string>
+#include <limits>
 
 using namespace std;
 
-// Function to convert rational number string to double
-double fractionDec(const string& fraction ) {
-    stringstream ss(fraction);
-    double numerator, denominator;
-    char slash;
-    ss >> numerator >> slash >> denominator;
-
-    return static_cast <double>(numerator) / denominator;
-}
-
-// Function to erase spaces from a string
+// Function to remove spaces from a string
 string removeSpaces(string str) {
     str.erase(remove(str.begin(), str.end(), ' '), str.end());
     return str;
@@ -73,6 +64,20 @@ bool operationCheck(char operation) {
     return true;
 }
 
+// Function to convert rational number string to double
+double fractionDec(string fraction ) {
+    if (fraction.find('/') == string::npos) {
+        fraction = fraction + "/1";
+    }
+
+    stringstream ss(fraction);
+    double numerator, denominator;
+    char slash;
+    ss >> numerator >> slash >> denominator;
+
+    return static_cast <double>(numerator) / denominator;
+}
+
 void menu() {
     cout << "**Welcome to Rational Number Calculator**" << endl;
     while (true) {
@@ -111,9 +116,12 @@ void menu() {
 
             // Checking if both numbers and operation are valid
             while (!number_check(number_1) or !number_check(number_2)
-            or !operationCheck(operation)) {
+            or !operationCheck(operation) or fractionDec(number_1) == numeric_limits<double>::infinity()
+            or fractionDec(number_2) == numeric_limits<double>::infinity()
+            or (operation == '/' and fractionDec(number_2) == 0)) {
 
-                if (!number_check(number_1)) {
+                if (!number_check(number_1)
+                or fractionDec(number_1) == numeric_limits<double>::infinity()) {
                     cout << "Number 1 is invalid, enter expression again:\n"
                             ">>";
 
@@ -123,7 +131,8 @@ void menu() {
                     ss << expression;
                     ss >> number_1 >> operation >> number_2;
                 }
-                else if (!number_check(number_2)) {
+                else if (!number_check(number_2)
+                or fractionDec(number_2) == numeric_limits<double>::infinity()) {
                     cout << "Number 2 is invalid, enter expression again:\n"
                             ">>";
 
@@ -154,7 +163,8 @@ void menu() {
 
             string operation;
             // checking if 1st number is valid
-            while (!number_check(number_1)) {
+            while (!number_check(number_1)
+                   or fractionDec(number_1) == numeric_limits<double>::infinity()) {
                 cout << "Number is invalid, enter again:\n"
                         ">>";
                 getline(cin, number_1);
@@ -174,7 +184,16 @@ void menu() {
             getline(cin, number_2);
 
             // checking if 2nd number is valid
-            while (!number_check(number_2)) {
+            while (!number_check(number_2)
+                   or fractionDec(number_2) == numeric_limits<double>::infinity()
+                   or (operation == "/" and fractionDec(number_2) == 0)) {
+
+                if (operation == "/" and fractionDec(number_2) == 0) {
+                    cout << "(Operation chosen '/')Unable to divide by zero, enter again:\n"
+                            ">>";
+                    getline(cin, number_2);
+                    continue;
+                }
                 cout << "Number is invalid, enter again:\n"
                         ">>";
                 getline(cin, number_2);
@@ -217,7 +236,7 @@ void menu() {
         }
 
         // Performing actual calculations
-        double double_1 = 0, double_2 = 0, result = 0;
+        double double_1, double_2, result = 0;
 
         // Converting numbers to double
         if (numberX_1.find('/') != string::npos) {
